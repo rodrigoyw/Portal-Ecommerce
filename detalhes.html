@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Resultados da Pesquisa</title>
+</head>
+<body>
+    <div id="resultados"></div>
+
+    <script>
+        // Extrai os parâmetros da URL
+        var urlParams = new URLSearchParams(window.location.search);
+        var query = urlParams.get('query');
+        var results = urlParams.get('results');
+        console.log(results)
+
+        
+        var resultadosFiltrados = JSON.parse(decodeURIComponent(results));
+
+     
+        var resultadosDiv = document.getElementById("resultados");
+        resultadosDiv.innerHTML = "<p>Resultados da pesquisa para: " + query + "</p>";
+        resultadosFiltrados.forEach(function(produto) {
+            var produtoHtml = "<div class='produto'>";
+            produtoHtml += "<h3>" + produto.title + "</h3>";
+            produtoHtml += "<img src='" + produto.image + "' alt='" + produto.title + "' />";
+            produtoHtml += "<p>" + produto.description + "</p>";
+            produtoHtml += "</div>";
+            resultadosDiv.innerHTML += produtoHtml;
+        });
+    </script>
+</body>
+</html>
